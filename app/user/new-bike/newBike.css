@@ -19,10 +19,10 @@ header .logo
 
 footer
 {
-    height:70px;
+    height:100px;
     background-color:rgb(0,0,0,0.8);
     color:white;
-    font-size:15px;
+    font-size:18px;
     font-weight: bold;
     display:flex;
     font-family:'Courier New';
@@ -32,7 +32,7 @@ footer
 footer .footer-text-left
 {
     width:20%;
-    margin-top:3%;
+    margin-top:5%;
     text-align: center;
 }
 
@@ -40,15 +40,14 @@ footer .footer-text-center
 {
     width:60%;
     text-align: center;
-    font-size:18px;
+    font-size:30px;
     display:grid;
-    margin-top:10px;
 }
 
 footer .footer-text-right
 {
     width:20%;
-    margin-top:3%;
+    margin-top:80px;
     text-align:right;
 }
 
@@ -97,62 +96,40 @@ footer .footer-text-right
     text-align:center;
 }
 
-li{
-    font-family: inherit;
-    font-size: inherit;
-    padding: 0.5em 1em;
-    color:white;
-    cursor: pointer;
-    background-size: 150% auto;
-    background-position: left center;
-    background-color:black;
-    margin-left:20px;
-    width:100px;
+input[type=text], select {
+  width:100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-li:hover{
-    color:black;
-    background-color:white;
-    border-radius:5px;
-    border-style:solid;
-    border-color:black;
-    border-bottom-width: 2px;
+input[type=submit] {
+  width:100%;
+  background-color:#4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.selectedli{
-    font-family: inherit;
-    font-size: inherit;
-    padding: 0.5em 1em;
-    border: solid px;
-    color:black;
-    cursor: pointer;
-    background-size: 150% auto;
-    background-position: left center;
-    background-color:white;
-    margin-left:20px;
+input[type=submit]:hover {
+  background-color: #45a049;
 }
 
-.lista{
-    margin-top:30px;
-    margin-bottom:30px;    
+.formular {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 50%;
+  margin-left:350px;
+  margin-top:30px;
+  margin-bottom: 30px;
 }
-
-.echipamente,.info-vanzari{
-    display:inline-block; 
-    margin-left:10px;
-}
-.echipamente{
-border-radius:100px;
-    width:200px;
-    height:200px;
-}
-
-.lista,.obiecte{
-    display: inline-block;
-}
-
-ul {list-style-type: none;}
-
 
 @media screen and (max-width:1024px){
 
@@ -171,12 +148,9 @@ ul {list-style-type: none;}
         font-size:13px;
     }
 
-    .echipamente{
-        width:100px;
-        height:100px;
-        margin-bottom:30px;
+    .formular{
+        margin-left:40px;
+        width:225px;
     }
-
-    ul {list-style-type: none;}
 
 }
