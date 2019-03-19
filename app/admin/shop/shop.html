@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="shop.css">
+    <title>BikeS.ro</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
+    </header>
+
+    <div class="div-buton">
+
+        <button type="button" class="buton">Home</button>
+        <button type="button" class="buton">Calendar</button>
+        <button type="button" class="buton_selected">Shop</button>
+        <button type="button" class="buton">News</button>
+    </div>
+
+    <div class="lista">
+        <ul>
+            <li>Biciclete</li>
+            <li class="selectedli">Piese</li>
+            <li>Accesorii</li>
+            <li>Echipamente</li>
+        </ul>
+    </div>
+
+    <main>
+        <div class="feed">
+            <img src="F:/BikeS/assets/unknown.png" alt="img">
+            <h2 class="info">Informatii</h2>
+            <div class="button-box">
+                <button type="button">Edit</button>
+                <button type="button" style="background-color:red;">Delete</button>
+            </div>
+        </div>
+
+        <div class="feed">
+            <img src="F:/BikeS/assets/unknown.png" alt="img">
+            <h2 class="info">Informatii</h2>
+            <div class="button-box">
+                <button type="button">Edit</button>
+                <button type="button" style="background-color:red;">Delete</button>
+            </div>
+        </div>
+
+        <form method="POST">
+            <form-field>
+                <h1>Add item</h1>
+            </form-field>
+
+            <form-field>
+                <label for="image">Image upload :</label>
+                <input id="image" type="file" name="image">
+            </form-field>
+
+            <form-field>
+                <lable for="price">Pret:</lable>
+                <input id="price" type="number" name="price" min="0" oninput="validity.valid||(value='');">
+            </form-field>
+
+            <form-field>
+                <label for="country">Tara de origine:</label>
+                <input id="country" type="text" name="country">
+            </form-field>
+
+            <form-field>
+                <lable for="warrant">Garantie:</lable>
+                <input id="warrant" type="number" name="warrant" min="0" oninput="validity.valid||(value='');">
+            </form-field>
+
+            <form-field>
+                <lable for="series">Serie:</lable>
+                <input id="series" type="number" name="series" min="0" oninput="validity.valid||(value='');">
+            </form-field>
+
+            <form-field>
+                <label for="model">Model:</label>
+                <input id="model" type="text" name="model">
+            </form-field>
+
+            <form-field>
+                <button type="submit">Save</button>
+            </form-field>
+
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-text-left">Versiunea 1.0.0</div>
+        <div class="footer-text-center">
+            <span>Vulpe Alexandru-Catalin</span>
+            <span>Anghel Marius-Cristi</span>
+        </div>
+        <div class="footer-text-right">Web Technologies 2019</div>
+    </footer>
+</body>
+
+</html>
