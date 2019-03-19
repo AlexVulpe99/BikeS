@@ -6,7 +6,7 @@ body
 header
 {
     height:200px;
-    background-image: url("F:/BikeS/assets/header.jpg");
+    background-image: url("../../assets/header.jpg");
     text-align: center;
     width:100%;
 }
