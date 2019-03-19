@@ -1,7 +1,7 @@
 header
 {
     height:200px;
-    background-image: url("fundal_header.jpg");
+    background-image: url("../../../assets/fundal_header.jpg");
     text-align: center;
     width:100%;
 }
