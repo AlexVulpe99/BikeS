@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="news.css">
+    <title>BikeS.ro</title>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
+    </header>
+
+    <div class="div-buton">
+
+        <button type="button" class="buton">Home</button>
+        <button type="button" class="buton">Calendar</button>
+        <button type="button" class="buton">Shop</button>
+        <button type="button" class="buton_selected">News</button>
+    </div>
+
+    <main>
+        <div class="feed">
+            <img src="F:/BikeS/assets/unknown.png" alt="img">
+            <h2 class="info">Informatii</h2>
+            <div class="button-box">
+                <button type="button">Edit</button>
+                <button type="button" style="background-color:red;">Delete</button>
+            </div>
+        </div>
+
+        <div class="feed">
+            <img src="F:/BikeS/assets/unknown.png" alt="img">
+            <h2 class="info">Informatii</h2>
+            <div class="button-box">
+                <button type="button">Edit</button>
+                <button type="button" style="background-color:red;">Delete</button>
+            </div>
+        </div>
+
+        <form method="POST">
+            <form-field>
+                <h1>Add news</h1>
+            </form-field>
+
+            <form-field>
+                <label for="image">Image upload :</label>
+                <input id="image" type="file" name="image">
+            </form-field>
+
+            <form-field>
+                <textarea id="info" type="text" name="info" placeholder="Informatii"></textarea>
+            </form-field>
+
+            <form-field>
+                <button type="submit">Save</button>
+            </form-field>
+
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-text-left">Versiunea 1.0.0</div>
+        <div class="footer-text-center">
+            <span>Vulpe Alexandru-Catalin</span>
+            <span>Anghel Marius-Cristi</span>
+        </div>
+        <div class="footer-text-right">Web Technologies 2019</div>
+    </footer>
+</body>
+
+</html>

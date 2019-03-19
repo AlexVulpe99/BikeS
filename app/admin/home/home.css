@@ -1,0 +1,185 @@
+body
+{
+    background-color: #FFF5EE;
+}
+
+header
+{
+    height:200px;
+    background-image: url("F:/BikeS/assets/header.jpg");
+    text-align: center;
+    width:100%;
+}
+
+header .logo
+{
+    font-size:60px;
+    font-family:cursive;
+    font-weight: bold;
+    font-style:italic;
+    padding-top: 50px;
+    cursor:pointer;
+    color:#B0E0E6;
+}
+
+.div-buton
+{
+    text-align:center;
+}
+
+.buton 
+{
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    border: 0;
+    color:white;
+    cursor: pointer;
+    background-size: 150% auto;
+    background-position: left center;
+    margin-top:20px;
+    background-color:black;
+    margin-left:20px;
+}
+
+.buton_selected
+{
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    border: solid 4px;
+    color:black;
+    cursor: pointer;
+    background-size: 150% auto;
+    background-position: left center;
+    margin-top:20px;
+    background-color:white;
+    margin-left:20px;
+}
+
+.buton:hover
+{
+    color:black;
+    background-color:white;
+    border-radius:5px;
+    border-style:solid;
+    border-color:black;
+    border-bottom-width: 2px;
+}
+
+.feed
+{
+    width:100%;
+    display:inline-flex;
+}
+
+.feed .user-info
+{
+    width:33%;
+    display: grid;
+    margin-top:20px;
+    margin-bottom:20px;
+    background-color:aquamarine;
+}
+
+.feed .bike-info
+{
+    width:33%;
+    display: grid;
+    margin-top:20px;
+    margin-bottom:20px;
+    background-color:aquamarine;
+}
+
+.feed .feed-btn-box
+{
+    width:33%;
+    display: grid;
+    margin-top:20px;
+    margin-bottom:20px;
+    background-color:aquamarine;
+}
+
+.feed span
+{
+    font-size:24px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace';
+
+}
+
+.feed button
+{
+    width: 50%;
+    margin: 0 auto;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+footer
+{
+    height:70px;
+    background-color:rgb(0,0,0,0.8);
+    color:white;
+    font-size:15px;
+    font-weight: bold;
+    display:flex;
+    font-family:'Courier New';
+    width:100%;
+}
+
+footer .footer-text-left
+{
+    width:20%;
+    margin-top:3%;
+    text-align: center;
+}
+
+footer .footer-text-center
+{
+    width:60%;
+    text-align: center;
+    font-size:18px;
+    display:grid;
+    margin-top:10px;
+}
+
+footer .footer-text-right
+{
+    width:20%;
+    margin-top:3%;
+    text-align:right;
+}
+
+@media screen and (max-width: 1024px)
+{
+    footer .footer-text-left{
+        margin-top:10%;
+        font-size:10px;
+    }
+
+    footer .footer-text-right{
+        font-size:10px;
+        margin-right:2%;
+        margin-top:10%;
+    }
+
+    footer .footer-text-center{
+        font-size:13px;
+    }
+
+    .feed span {
+        font-size:12px;
+        padding-left:5px;   
+    }
+
+    .feed button
+    {
+        font-size:12px;
+    }
+
+}

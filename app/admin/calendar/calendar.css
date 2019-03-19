@@ -1,0 +1,338 @@
+body
+{
+    background-color: #FFF5EE;
+}
+
+header
+{
+    height:200px;
+    background-image: url("F:/BikeS/assets/header.jpg");
+    text-align: center;
+    width:100%;
+}
+
+header .logo
+{
+    font-size:60px;
+    font-family:cursive;
+    font-weight: bold;
+    font-style:italic;
+    padding-top: 50px;
+    cursor:pointer;
+    color:#B0E0E6;
+}
+
+.div-buton
+{
+    text-align:center;
+}
+
+.buton 
+{
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    border: 0;
+    color:white;
+    cursor: pointer;
+    background-size: 150% auto;
+    background-position: left center;
+    margin-top:20px;
+    background-color:black;
+    margin-left:20px;
+}
+
+.buton_selected
+{
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.5em 1em;
+    border-radius: 10px;
+    border: solid 4px;
+    color:black;
+    cursor: pointer;
+    background-size: 150% auto;
+    background-position: left center;
+    margin-top:20px;
+    background-color:white;
+    margin-left:20px;
+}
+
+.buton:hover
+{
+    color:black;
+    background-color:white;
+    border-radius:5px;
+    border-style:solid;
+    border-color:black;
+    border-bottom-width: 2px;
+}
+
+main
+{
+    display: inline-flex;
+    width:100%;
+}
+
+
+ul {list-style-type: none;}
+
+/* luna header */
+.month {
+  margin-top: 40px;
+  padding: 70px 25px;
+  width:450px;
+  height:50px;
+  background-color: #1abc9c;
+  text-align: center;
+}
+
+/* luna list */
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* buton prev */
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+/* buton next */
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+/* zilele lu-du */
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color:#ddd;
+  color:black;
+  width: 500px;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+}
+
+/* zilele 1-31 */
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+  width: 500px;
+}
+
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+}
+
+/*colorare zi*/
+.days li .ocupat {
+  padding: 5px;
+  background:red;
+  color: white !important;
+  cursor: pointer;
+}
+
+.days li .liber {
+  padding: 5px;
+  background:green;
+  color: white !important;
+  cursor: pointer;
+}
+.days li .zi-libera {
+  padding: 5px;
+  background:black;
+  color: white !important;
+  cursor: pointer;
+}
+
+.days li .selected
+{
+    background:blue;
+    color:white!important;
+    padding:5px;
+}
+
+.calendar{
+  margin-bottom: 20px;
+  margin-left:10%;
+  display:inline-block;
+}
+
+.box--form
+{
+    margin-top:20px;
+    margin-left:10%;
+}
+
+.box--form form
+{
+    display: grid;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    line-height: 30px;
+}
+
+.box--form form-field
+{
+    padding:20px;
+    font-size:25px;
+    background-color: wheat;
+    text-align: left;
+    color:#6E6E6E;
+    padding-top: 5px;
+}
+
+.box--form form-field label
+{
+    cursor: pointer;
+}
+
+.box--form form-field input
+{
+    border: none;
+    background-color: wheat;
+    width: 70%;
+    font-size: 25px;
+    color:#6E6E6E;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.box--form button
+{
+    width: 30%;
+    margin-top: 3%;
+    margin-left: 35%;
+    height: 70%;
+    box-shadow: 0px 6px 20px rgb(0,0,0,0.8);
+    font-family: 'Courier New';
+    font-weight: bold;
+    text-align: center;
+    font-size:20px;
+    border-radius:8px;
+    background-color: #0063CB;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+
+footer
+{
+    height:70px;
+    background-color:rgb(0,0,0,0.8);
+    color:white;
+    font-size:15px;
+    font-weight: bold;
+    display:flex;
+    font-family:'Courier New';
+    width:100%;
+}
+
+footer .footer-text-left
+{
+    width:20%;
+    margin-top:3%;
+    text-align: center;
+}
+
+footer .footer-text-center
+{
+    width:60%;
+    text-align: center;
+    font-size:18px;
+    display:grid;
+    margin-top:10px;
+}
+
+footer .footer-text-right
+{
+    width:20%;
+    margin-top:3%;
+    text-align:right;
+}
+
+@media screen and (max-width:1024px){
+
+    main
+    {
+        display:grid;
+    }
+
+    .box--form
+    {
+        margin-left:10px;
+    }
+
+    .box--form form-field
+    {
+        font-size:14px;
+    }
+
+    .box--form form-field input
+    {
+        font-size:14px;
+    }
+
+    .box--form button
+    {
+        font-size:14px;
+    }
+
+    footer .footer-text-left{
+        margin-top:10%;
+        font-size:10px;
+    }
+  
+    footer .footer-text-right{
+        font-size:10px;
+        margin-right:2%;
+        margin-top:10%;
+    }
+  
+    footer .footer-text-center{
+        font-size:13px;
+    }
+  
+    .calendar,.info{
+      margin-left:30px;
+    }
+    .month{
+      width:250px;
+    }
+    .days{
+      width:300px;
+    }
+  
+    .days li{
+      width: 12%;
+    }
+    .weekdays{
+      width:300px;
+      font-size: 50%;
+    }
+  }
