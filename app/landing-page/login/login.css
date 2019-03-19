@@ -7,7 +7,7 @@ body
 header
 {
     height:200px;
-    background-image: url("F:/BikeS/assets/header.jpg");
+    background-image: url("../../../assets/header.jpg");
     text-align: center;
     width:100%;
 }
@@ -148,15 +148,17 @@ footer .footer-text-right
         font-size:13px;
     }
 
-    .box--form form-field{
-        width: 96%;
-        font-size:12px;
-        padding:2px;
-        margin-left:2px;
-    }
-
     .box--form form-field input{
         font-size:12px;
+        width:60%;
+    }
+
+    .box--form form-field
+    {
+        width: 300px;
+        font-size:12px;
+        padding:2px;
+        margin-left:3%;
     }
 
     .box--form button
@@ -164,8 +166,6 @@ footer .footer-text-right
         font-size:12px;
         margin-left:35%;
         height:100%;
-        margin-top:20px;
-        margin-bottom:20px;
     }
 
     .box-info
