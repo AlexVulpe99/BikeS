@@ -51,6 +51,7 @@ header .logo
     background-color: #0063CB;
     color: #FFFFFF;
     cursor: pointer;
+    border:unset;
 }
 
 .box-info

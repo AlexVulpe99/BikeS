@@ -6,7 +6,7 @@ body
 header
 {
     height:200px;
-    background-image: url("F:/BikeS/assets/header.jpg");
+    background-image: url("../../../assets/header.jpg");
     text-align: center;
     width:100%;
 }
@@ -214,7 +214,6 @@ ul {list-style-type: none;}
 
 .box--form form-field input
 {
-    border: none;
     background-color: wheat;
     width: 70%;
     font-size: 25px;
@@ -238,6 +237,7 @@ ul {list-style-type: none;}
     background-color: #0063CB;
     color: #FFFFFF;
     cursor: pointer;
+    border:unset;
 }
 
 
@@ -319,7 +319,7 @@ footer .footer-text-right
     }
   
     .calendar,.info{
-      margin-left:30px;
+      margin-left:10px;
     }
     .month{
       width:250px;
