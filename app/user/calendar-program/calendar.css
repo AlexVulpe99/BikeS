@@ -207,6 +207,10 @@ ul {list-style-type: none;}
   display:inline-flex
 }
 
+form{
+  display: inline;
+}
+
 
 @media screen and (max-width:1024px){
 

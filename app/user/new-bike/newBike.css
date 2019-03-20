@@ -132,6 +132,10 @@ input[type=submit]:hover {
   margin-bottom: 30px;
 }
 
+form{
+    display: inline;
+}
+
 @media screen and (max-width:1024px){
 
     footer .footer-text-left{

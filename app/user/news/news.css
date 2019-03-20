@@ -157,6 +157,10 @@ font-family: inherit;
     background-color: white;    
 }
 
+form{
+    display: inline;
+}
+
 
 @media screen and (max-width:1024px){
 

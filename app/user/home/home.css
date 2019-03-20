@@ -120,6 +120,10 @@ footer .footer-text-right
     margin-left:23px;
 }
 
+form{
+    display:inline;
+}
+
 
 @media screen and (max-width:1024px){
     .informatii-info{
