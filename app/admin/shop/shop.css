@@ -151,6 +151,8 @@ main .feed
     color: #FFFFFF;
     font-size: 20px;
     font-weight: bold;
+    border:unset;
+    cursor: pointer;
 }
 
 form
@@ -181,6 +183,8 @@ form button
     font-weight: bold;
     border-radius:8px;
     background-color:orange;
+    border:unset;
+    cursor: pointer;
 }
 
 footer

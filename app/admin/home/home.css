@@ -118,6 +118,8 @@ header .logo
     color: white;
     font-size: 20px;
     font-weight: bold;
+    border:unset;
+    cursor: pointer;
 }
 
 footer

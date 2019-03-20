@@ -55,7 +55,6 @@ header .logo
 
 .box--form form-field input
 {
-    border: none;
     background-color: wheat;
     width: 70%;
     font-size: 25px;
@@ -79,6 +78,7 @@ header .logo
     background-color: #0063CB;
     color: #FFFFFF;
     cursor: pointer;
+    border:unset;
 }
 
 .box-info
@@ -155,7 +155,7 @@ footer .footer-text-right
 
     .box--form form-field
     {
-        width: 300px;
+        width: 90%;
         font-size:12px;
         padding:2px;
         margin-left:3%;
@@ -163,9 +163,9 @@ footer .footer-text-right
 
     .box--form button
     {
-        font-size:12px;
+        font-size:15px;
         margin-left:35%;
-        height:100%;
+        height:80%;
     }
 
     .box-info
