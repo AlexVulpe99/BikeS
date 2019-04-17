@@ -1,0 +1,67 @@
+#Autentificare:
+
+Vom folosi Json Web Token,unde vom cripta id-ul utilizatorului si acesta expira dupa o ora.
+clientul(request token) ->(create token)server(send jwt to client)->
+client(verify token/extract info/persisit token)->acces(foloseste acelasi token pentru acces , dupa ce expira se logheaza iar) 
+si verifica de fiecare data token-ul
+-folosim post
+
+Header:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+Payload:
+
+{
+  "id": "",
+  "nume": ""
+}
+
+Signature:
+
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  your-256-bit-secret
+)
+
+
+#MVC
+
+MVC  
+- model(functii/ interactiunea cu bd) 
+- view(ce vede user-ul/interfata) 
+- controller(legatura dintre view si model, primeste request de la View, trimite response la Model)
+
+Avem 3 foldere principale in aplicatie 
+-user
+-admin
+-landing-page
+
+User
+6 pagini(add-programare,calendar-program,home,new-bike,new,shop)
+- fiecare pagina va avea propriul view,model,controller
+- pentru formulare vom folosi POST
+-folderul user va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine
+ o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+
+Admin
+4 pagini(calendar,shome,news,shop)
+- fiecare pagina va avea propriul view,model,controller
+-pentru formulare vom folosi POST
+-folderul admin va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine
+ o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+
+--LANDING-PAGE--
+Avem 4 pagini(forgot-password,login,register si landing-page)
+-3 din ele vor avea propriul view, model, controller 
+-pentru formulare vom folosi POST
+-folderul landing-page va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine 
+o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+
+
+-fiecare model si controller vor avea propria clasa
+-cele 3 controllere principale vor avea o clasa abstracta
+-fiecare folder user,admin,landing-page va avea 6,4 si 3 sub-foldere care fiecare ca avea cate un view,model si controller
