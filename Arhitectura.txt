@@ -1,0 +1,30 @@
+
+
+BAZA DE DATE
+
+--TABELE--
+
+users --> uid - username - password 
+
+admins --> aid - username - password
+
+calendar --> eid(entry-id) - date - hour - aid(optional/poate fi null) - email - problem
+
+shop --> iid - category - image - price - country - warranty - series - model
+
+bikes --> bid - uid - material - year - state - weight - speeds - image
+
+news --> nid - image - description
+
+appointments --> aid - uid - firstname - lastname - phone - email - brand - series - problem - date - image
+
+--/TABELE--
+
+la accept appointment - i se face un entry in calendar cu o ora default - si din appointment o sa luam email si problem si date
+daca admin-ul baga manual, o sa dea un date, un hour(sau ii dam default) un email si o problema, si in cazul asta, aid va ramane null
+
+
+
+
+
+
