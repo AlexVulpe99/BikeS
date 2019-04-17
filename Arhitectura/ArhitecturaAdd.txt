@@ -42,24 +42,27 @@ Avem 3 foldere principale in aplicatie
 
 User
 6 pagini(add-programare,calendar-program,home,new-bike,new,shop)
-- fiecare pagina va avea propriul view,model,controller
+- fiecare pagina va avea propriul view,controller
 - pentru formulare vom folosi POST
 -folderul user va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine
  o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+-folderul user va avea un model care va contine toate functiile pentru fiecare view-controller
 
 Admin
 4 pagini(calendar,shome,news,shop)
-- fiecare pagina va avea propriul view,model,controller
+- fiecare pagina va avea propriul view,controller
 -pentru formulare vom folosi POST
 -folderul admin va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine
  o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+-folderul admin va avea un model care va contine toate functiile pentru fiecare view-controller
 
 --LANDING-PAGE--
 Avem 4 pagini(forgot-password,login,register si landing-page)
--3 din ele vor avea propriul view, model, controller 
+-3 din ele vor avea propriul view, controller 
 -pentru formulare vom folosi POST
 -folderul landing-page va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine 
 o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+-folderul landing-page va avea un model care va contine toate functiile pentru fiecare view-controller
 
 
 -fiecare model si controller vor avea propria clasa
