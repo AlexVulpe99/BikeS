@@ -1,0 +1,58 @@
+
+
+BAZA DE DATE
+
+--TABELE--
+
+users --> uid - username - password 
+
+admins --> aid - username - password
+
+calendar --> eid(entry-id) - date - hour - aid(optional/poate fi null) - email - problem
+
+shop --> iid - category - image - price - country - warranty - series - model
+
+bikes --> bid - uid - material - year - state - weight - speeds - image
+
+news --> nid - image - description
+
+appointments --> aid - uid - firstname - lastname - phone - email - brand - series - problem - date - image
+
+--/TABELE--
+
+la accept appointment - i se face un entry in calendar cu o ora default - si din appointment o sa luam email si problem si date
+daca admin-ul baga manual, o sa dea un date, un hour(sau ii dam default) un email si o problema, si in cazul asta, aid va ramane null
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+MVC  - model(functiile definite / interactiunea cu baza de date) - view(ce vede user-ul/interfata) - controller(legatura dintre view si model, primeste request de la View, trimite response la Model)
+
+Avem 3 foldere principale in aplicatie --- user -- admin -- landing-page
+--USER--
+Avem 6 pagini - fiecare din cele 6 pagini va avea propriul view,// propriul model, propriul controller si pentru formulare vom folosi POST
+Tot folderul User va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+
+--ADMIN--
+Avem 4 pagini - fiecare din cele 4 pagini va avea propriul view,// propriul model, propriul controller si pentru formulare vom folosi POST
+Tot folderul Admin va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+
+--LANDING-PAGE--
+Avem 4 pagini - doar 3 din ele vor avea propriul view,// propriul model, propriul controller si pentru formulare vom folosi POST
+Tot folderul Landing-page va avea un controller pe care il vom folosi pentru a lega tot flow-ul si va contine o clasa abstracta care va fi extinsa pentru clasele din controllere legate de view-uri
+
