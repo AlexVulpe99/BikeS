@@ -1,98 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="home.css">
+    <link rel="stylesheet" type="text/css" href="./home.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>Document</title>
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 
 
 </head>
+
+<script>
+    $(document).ready(function () {
+        if (!getCookie('accessToken')) {
+            window.location.href = "../../landing-page/landing-page.html";
+        }
+    });
+
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+</script>
+
 <body>
 
-        <header>
-                <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
-         </header>
+    <header>
+        <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
+    </header>
 
-         <main class="main">
-            
-            <div class="div-buton">
+    <main class="main">
 
-                    <button type="button" class="buton_selected">Home</button>
-                    <button type="button" class="buton">Calendar</button>
-                    <button type="button" class="buton">Shop</button>
-                    <button type="button" class="buton">New Bike</button>
-                    <button type="button" class="buton">News</button>
-                    <button type="button" class="buton">Add Appointment</button>
+        <div class="div-buton">
+
+            <button type="button" class="buton_selected">Home</button>
+            <button type="button" onclick="window.location.href='../calendar-program/calendar.html'"
+                class="buton">Calendar</button>
+            <button type="button" onclick="window.location.href='../shop/shop.html'" class="buton">Shop</button>
+            <button type="button" onclick="window.location.href='../new-bike/newBike.html'" class="buton">New
+                Bike</button>
+            <button type="button" onclick="window.location.href='../news/news.html'" class="buton">News</button>
+            <button type="button" onclick="window.location.href='../add-programare/AddApp.html'" class="buton">Add
+                Appointment</button>
+            <button type="button" class="buton" onclick="logout()">Log out</button>
+            <script>
+                function deleteCookie(name) {
+                    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                }
+                function logout() {
+                    deleteCookie('accessToken');
+                    window.location.href = "../../landing-page/landing-page.html";
+                }
+            </script>
+        </div>
+
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
             </div>
 
-            <div class="div_informatii_user">
+        </div>
 
-                <div class="poza-info">
-                <h3>Poza utilizator</h3>
-                <img src="../../../assets/imagine_utilizator.png" class="imagine_utilizator">
+        <h1 style="text-align: center;">INFORMATII DESPRE BICICLETELE PROPRII!!</h1>
+        <h3 style="text-align: center;color:red;" id="text-info"></h3>
 
-                </div>
-            <div class="informatii-info">  
+        <div id="biciclete" class="div_informatii_biciclete">
+            <!-- <img src="" class ="imagine_bicicleta"> -->
 
-                <H3>Nume : Nume_Utilizator </H3>
-                <H3>Cod : Cod_Utilizator </H3>
-                <H3>Email : Email_Utilizator </H3>
-                <h3>Alte informatii...</h3>
+            <script>
+                var modal = document.getElementById('myModal');
+                var span = document.getElementsByClassName("close")[0];
+                span.onclick = function () {
+                    modal.style.display = "none";
+                }
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+                var textInfo = document.getElementById('text-info');
 
-            </div>
-            </div>
+                $.ajax({
+                    url: "http://localhost:801/bike_api/bikes",
+                    type: "GET",
+                    contentType: 'application/json',
+                    headers: {
+                        "Bearer": getCookie('accessToken')
+                    },
+                    success: function (result) {
+                        if (!result['status']) {
+                            alert(result['message']);
+                        }
+                        else 
+                        if(jQuery.isEmptyObject(result['data'])){
+                            textInfo.innerText = 'Nicio bicicleta adaugata momentan';
+                            console.log('no data lenght');
+                        }
+                        else
+                        {
+                            textInfo.innerText = ' ';
+                            var data = result['data'];
+                            data.forEach(element => {
+                                var codHTML = '<img src=\"' + element['image_path'] + '\" class =\"imagine_bicicleta\">' +
+                                    '<div class=\"informatii-bicicleta\">' +
+                                    '<h3> Informatii bicicleta </h3>' +
+                                    '<h3>Material: ' + element['material'] + ' </h3>' +
+                                    '<h3>An fabricatie: ' + element['an'] + ' </h3>' +
+                                    '<h3>Stare: ' + element['stare'] + ' </h3>' +
+                                    '<h3>Greutate: ' + element['greutate'] + ' </h3>' +
+                                    '<h3>Viteze: ' + element['viteze'] + ' </h3>' + 
+                                    '<button id="' + element['bid'] + '-delete" class="buton" style="color:red;">Delete</button>' +
+                                    '</div > ';
+                                document.getElementById('biciclete').insertAdjacentHTML('beforeend', codHTML);
+                                document.getElementById(element['bid'] + '-delete').dataset.bid = element['bid'];
+                                document.getElementById(element['bid'] + '-delete').addEventListener("click", function (e) {
 
-            <div class="div_informatii_biciclete">
-
-                <img src="bicicleta1.jpg" class="imagine_bicicleta">
-                
-                <div class="informatii-bicicleta">                
-                <h3>Informatii bicicleta 1</h3>
-                <h3>Material: </h3>
-                <h3>An fabricatie: </h3>
-                <h3>Stare: </h3>
-                <h3>Greutate: </h3>
-                <h3>Viteze: </h3>
-                </div>
-
-
-                <img src="bicicleta2.jpg" class="imagine_bicicleta">
-
-                <div class="informatii-bicicleta">                
-                    <h3 >Informatii bicicleta 2</h3>
-                    <h3>Material: </h3>
-                    <h3>An fabricatie: </h3>
-                    <h3>Stare: </h3>
-                    <h3>Greutate: </h3>
-                    <h3>Viteze: </h3>
-                </div>
-
-                <img src="bicicleta3.jpg" class="imagine_bicicleta">
-                
-                <div class="informatii-bicicleta">                
-                    <h3 >Informatii bicicleta 3</h3>
-                    <h3>Material: </h3>
-                    <h3>An fabricatie: </h3>
-                    <h3>Stare: </h3>
-                    <h3>Greutate: </h3>
-                    <h3>Viteze: </h3>
-                </div>
+                                    let bid = e.target.dataset.bid;
+                                    let data = { };
+                                    data.bid = bid;
+                                    $.ajax({
+                                        url: "http://localhost:801/bike_api/bikes",
+                                        type: "DELETE",
+                                        contentType: 'application/json',
+                                        headers: {
+                                            "Bearer": getCookie('accessToken')
+                                        },
+                                        data: JSON.stringify(data),
+                                        success: function (result) {
+                                            if(!alert(result['message']))
+                                            {
+                                                window.location.reload();
+                                            }
+                                        },
+                                        error: function (xhr, resp, text) {
+                                            console.log(xhr);
+                                            console.log(resp);
+                                            console.log(text);
+                                            alert("Ceva nu a mers bine!!");
+                                        }
+                                    });
+                                });
+                            });
 
 
-            </div>
+                        }
+                    },
+                    error: function (xhr, resp, text) {
+                        console.log(xhr);
+                        console.log(resp);
+                        console.log(text);
+                        alert("Ceva nu a mers bine!!");
+                    }
+                });
+            </script>
 
-         </main>
+        </div>
 
-        <footer>
-            <div class="footer-text-left">Versiunea 1.0.0</div>
-                <div class="footer-text-center">
-                    <span>Vulpe Alexandru-Catalin</span>
-                    <span>Anghel Marius-Cristi</span>
-                </div>
-            <div class="footer-text-right">Web Technologies 2019</div>
-        </footer>
-    
+    </main>
+
+    <footer>
+        <div class="footer-text-left">Versiunea 1.0.0</div>
+        <div class="footer-text-center">
+            <span>Vulpe Alexandru-Catalin</span>
+            <span>Anghel Marius-Cristi</span>
+        </div>
+        <div class="footer-text-right">Web Technologies 2019</div>
+    </footer>
+
 </body>
+
 </html>

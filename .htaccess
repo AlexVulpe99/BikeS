@@ -1,0 +1,4 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^bike_api/.+$ ./bike-api.php [NC,L] 

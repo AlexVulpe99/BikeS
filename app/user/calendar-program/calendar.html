@@ -1,126 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="calendar.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="calendar.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+  <script src="https://fullcalendar.io/releases/core/4.2.0/main.min.js"></script>
+  <script src="https://fullcalendar.io/releases/daygrid/4.2.0/main.min.js"></script>
+  <script src="https://fullcalendar.io/releases/timegrid/4.2.0/main.min.js"></script>
+  <script src="https://fullcalendar.io/releases/resource-common/4.2.0/main.min.js"></script>
+  <script src="https://fullcalendar.io/releases/resource-daygrid/4.2.0/main.min.js"></script>
+  <script src="https://fullcalendar.io/releases/resource-timegrid/4.2.0/main.min.js"></script>
+
+  <link href='https://fullcalendar.io/releases/core/4.2.0/main.min.css' rel='stylesheet' />
+  <link href='https://fullcalendar.io/releases/daygrid/4.2.0/main.min.css' rel='stylesheet' />
+  <link href='https://fullcalendar.io/releases/timegrid/4.2.0/main.min.css' rel='stylesheet' />
+
+  <title>Document</title>
 
 
 
 </head>
+
+<script>
+  $(document).ready(function () {
+    if (!getCookie('accessToken')) {
+      window.location.href = "../../landing-page/landing-page.html";
+    }
+  });
+
+  function getCookie(key) {
+    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+  }
+</script>
+
 <body>
 
-                  <header>
-                          <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
-                    </header>
+  <header>
+    <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
+  </header>
 
-                        <main class="main">
+  <main class="main">
 
-                              <div class="div-buton">
+    <div class="div-buton">
 
-                              <form action="file:///B:/Programe/BikeS/app/user/home/home.html">
-                                  <button type="submit" class="buton">Home</button>
-                              </form>
-                              <form>
-                                  <button type="submit" class="buton_selected">Calendar</button>
-                              </form>
-                              <form action="file:///B:/Programe/BikeS/app/user/shop/shop.html">
-                                  <button type="submit" class="buton">Shop</button>
-                              </form>
-                              <form action="file:///B:/Programe/BikeS/app/user/new-bike/newBike.html">
-                                  <button type="submit" class="buton">New Bike</button>
-                              </form>
-                              <form action="file:///B:/Programe/BikeS/app/user/news/news.html">
-                                  <button type="submit" class="buton">News</button>
-                              </form>
-                              <form action="file:///B:/Programe/BikeS/app/user/add-programare/AddApp.html">
-                                  <button type="submit" class="buton">Add Appointment</button>
-                              </form>
-              <div class="calendar-info">
-                <div class="calendar">
+      <button type="button" onclick="window.location.href='../home/home.html'" class="buton">Home</button>
+      <button type="button" class="buton_selected">Calendar</button>
+      <button type="button" onclick="window.location.href='../shop/shop.html'" class="buton">Shop</button>
+      <button type="button" onclick="window.location.href='../new-bike/newBike.html'" class="buton">New Bike</button>
+      <button type="button" onclick="window.location.href='../news/news.html'" class="buton">News</button>
+      <button type="button" onclick="window.location.href='../add-programare/AddApp.html'" class="buton">Add
+        Appointment</button>
+      <button type="button" class="buton" onclick="logout()">Log out</button>
+      <script>
+        function deleteCookie(name) {
+          document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+        function logout() {
+          deleteCookie('accessToken');
+          window.location.href = "../../landing-page/landing-page.html";
+        }
+      </script>
 
-                        <div class="month"> 
-                        <ul>
-                          <li class="prev">&#10094;</li>
-                          <li class="next">&#10095;</li>
-                          <li>Martie<br><span style="font-size:18px">2019</span></li>
-                        </ul>
-                      </div>
-                      
-                      <ul class="weekdays">
-                        <li>Luni</li>
-                        <li>Marti</li>
-                        <li>Miercuri</li>
-                        <li>Joi</li>
-                        <li>Vineri</li>
-                        <li>Sambata</li>
-                        <li>Duminica</li>
-                      </ul>
-                      
-                      <ul class="days"> 
-                        <li>25</li>
-                        <li>26</li>
-                        <li>27</li>
-                        <li>28</li>
-                        <li><span class="liber">1</span></li>
-                        <li><span class="ocupat">2</span></li>
-                        <li><span class="liber">3</span></li>
-                        <li><span class="ocupat">4</span></li>
-                        <li><span class="liber">5</span></li>
-                        <li><span class="ocupat">6</span></li>
-                        <li><span class="zi-libera">7</span></li>
-                        <li><span class="liber">8</span></li>
-                        <li><span class="liber">9</span></li>
-                        <li><span class="ocupat">10</span></li>
-                        <li><span class="liber">11</span></li>
-                        <li><span class="zi-libera">12</span></li>
-                        <li><span class="liber">13</span></li>
-                        <li><span class="zi-libera">14</span></li>
-                        <li><span class="liber">15</span></li>
-                        <li><span class="liber">16</span></li>
-                        <li><span class="liber">17</span></li>
-                        <li><span class="ocupat">18</span></li>
-                        <li><span class="liber">19</span></li>
-                        <li><span class="liber">20</span></li>
-                        <li><span class="zi-libera">21</span></li>
-                        <li><span class="liber">22</span></li>
-                        <li><span class="liber">23</span></li>
-                        <li><span class="ocupat">24</span></li>
-                        <li><span class="ocupat">25</span></li>
-                        <li><span class="ocupat">26</span></li>
-                        <li><span class="liber">27</span></li>
-                        <li><span class="zi-libera">28</span></li>
-                        <li><span class="liber">29</span></li>
-                        <li><span class="liber">30</span></li>
-                        <li><span class="liber">31</span></li>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                        <li>6</li>
-                        <li>7</li>          
-                      </ul>
-              </div>
-                   <div class="info">
-                      <h3>INFO: </h3>
-                      <h3>Rosu-Ocupat</h3>
-                      <h3>Verde-liber</h3>
-                      <h3>Negru-zi libera</h3>
-                    </div>
-              </div>
-         </main>
 
-        <footer>
-                    <div class="footer-text-left">Versiunea 1.0.0</div>
-                    <div class="footer-text-center">
-                        <span>Vulpe Alexandru-Catalin</span>
-                        <span>Anghel Marius-Cristi</span>
-                    </div>
-                    <div class="footer-text-right">Web Technologies 2019</div>
-        </footer>
-    
+    </div>
+
+    <div id='calendar' style="max-width: 900px;margin: 40px auto;"></div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          plugins: ['resourceTimeGrid'],
+          timeZone: 'UTC',
+          minTime: "09:00:00",
+          maxTime: "17:00:00",
+          defaultView: 'resourceTimeGridDay',
+          resources: [
+            { id: 'a', title: 'Mecanic' }
+          ]
+        });
+        /* var event = {
+            title: 'The Title',
+            start: '2019-06-10 11:00:00',
+            end: '2019-06-10 13:00:00',
+            resourceId: 'a'
+        }; */
+        /* calendar.addEvent(event); */
+
+        $.ajax({
+          url: "http://localhost:801/bike_api/adminapp",
+          type: "GET",
+          contentType: 'application/json',
+          headers: {
+            "Bearer": getCookie('accessToken')
+          },
+          success: function (result) {
+            if (!result['status']) {
+              alert(result['message']);
+            }
+            else {
+              //console.log(result.data);
+              var data = result.data;
+              data.forEach(element => {
+                var event = {
+                  title: element.firstname+' '+element.lastname ,
+                  start: element.data_inreg,
+                  end: element.data_end,
+                  resourceId: 'a'
+                };
+                calendar.addEvent(event);
+              });
+
+            }
+          },
+          error: function (xhr, resp, text) {
+            console.log(xhr);
+            console.log(resp);
+            console.log(text);
+            alert("Ceva nu a mers bine!!");
+          }
+        });
+
+
+
+        calendar.render();
+      });
+    </script>
+  </main>
+
+  <footer>
+    <div class="footer-text-left">Versiunea 1.0.0</div>
+    <div class="footer-text-center">
+      <span>Vulpe Alexandru-Catalin</span>
+      <span>Anghel Marius-Cristi</span>
+    </div>
+    <div class="footer-text-right">Web Technologies 2019</div>
+  </footer>
+
 </body>
+
 </html>

@@ -1,90 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="AddApp.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>Document</title>
 
+    <style>
+        input[type=datetime] {
+            width: 100%;
+            padding: 13px 21px;
+            margin: 7px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+
 </head>
+
+<script>
+    $(document).ready(function () {
+        if (!getCookie('accessToken')) {
+            window.location.href = "../../landing-page/landing-page.html";
+        }
+    });
+
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+</script>
+
 <body>
 
-        <header>
-                <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
-         </header>
+    <header>
+        <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
+    </header>
 
-         <main class="main">
+    <main class="main">
 
-            <div class="div-buton">
+        <div class="div-buton">
 
-                <form action="file:///B:/Programe/BikeS/app/user/home/home.html?">
-                    <button type="submit" class="buton">Home</button>
-                </form>
-                <form action="file:///B:/Programe/BikeS/app/user/calendar-program/calendar.html?">
-                    <button type="submit" class="buton">Calendar</button>
-                </form>
-                <form action="file:///B:/Programe/BikeS/app/user/shop/shop.html?">
-                    <button type="submit" class="buton">Shop</button>
-                </form>
-                <form action="file:///B:/Programe/BikeS/app/user/new-bike/newBike.html?">
-                    <button type="submit" class="buton">New Bike</button>
-                </form>
-                <form action="file:///B:/Programe/BikeS/app/user/news/news.html?">
-                    <button type="submit" class="buton">News</button>
-                </form>
-                <form>
-                    <button type="submit" class="buton_selected">Add Appointment</button>
-                </form>
-            </div>
+            <button type="button" onclick="window.location.href='../home/home.html'" class="buton">Home</button>
+            <button type="button" onclick="window.location.href='../calendar-program/calendar.html'"
+                class="buton">Calendar</button>
+            <button type="button" onclick="window.location.href='../shop/shop.html'" class="buton">Shop</button>
+            <button type="button" onclick="window.location.href='../new-bike/newBike.html'" class="buton">New
+                Bike</button>
+            <button type="button" onclick="window.location.href='../news/news.html'" class="buton">News</button>
+            <button type="button" class="buton_selected">Add Appointment</button>
+            <button type="button" class="buton" onclick="logout()">Log out</button>
+            <script>
+                function deleteCookie(name) {
+                    document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                }
+                function logout() {
+                    deleteCookie('accessToken');
+                    window.location.href = "../../landing-page/landing-page.html";
+                }
+            </script>
+        </div>
 
 
-                <div class="formular">
-                        <form>
-                          <label for="nume">Nume </label>
-                          <input type="text" id="nume" name="Nume" placeholder="Nume...">
-                      
-                          <label for="prenume">Prenume </label>
-                          <input type="text" id="prenume" name="Prenume" placeholder="Prenume...">
+        <div class="formular">
+            <form id="addApp" onsubmit="return false">
+                <label for="nume">Nume </label>
+                <input type="text" id="nume" name="Nume" placeholder="Nume..." required>
 
-                          <label for="numar">Telefon</label>
-                          <input type="text" id="numar" name="Telefon" placeholder="Telefon...">
-                          
-                          <label for="email">Email</label>
-                          <input type="email" id="email" name="Email" placeholder="Email...">
-                          
-                          <label for="marca">Marca </label>
-                          <input type="text" id="marca" name="Marca" placeholder="Marca...">
+                <label for="prenume">Prenume </label>
+                <input type="text" id="prenume" name="Prenume" placeholder="Prenume..." required>
 
-                          <label for="seria">Seria </label>
-                          <input type="text" id="seria" name="Seria" placeholder="Seria...">
+                <label for="numar">Telefon</label>
+                <input type="text" id="numar" name="Telefon" placeholder="Telefon..." required>
 
-                          <label for="problema">Problema </label>
-                          <input type="text" id="problema" name="Problema" placeholder="Problema...">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="Email" placeholder="Email..." required>
 
-                          <label for="dataprogramarii">Data programarii</label>
-                          <input type="date" id="dataprogramarii" name="Data programarii">
+                <label for="marca">Marca </label>
+                <input type="text" id="marca" name="Marca" placeholder="Marca..." required>
 
-                          <label for="imagine">Poza defectiune</label>
-                          <input type="file" class="input-file">
-                        
-                          <input type="submit" value="Submit">
+                <label for="seria">Seria </label>
+                <input type="text" id="seria" name="Seria" placeholder="Seria..." required>
 
-                        </form>
+                <label for="problema">Problema </label>
+                <input type="text" id="problema" name="Problema" placeholder="Problema..." required>
+
+                <div>
+                    <label for="dataprogramarii">Data programarii</label>
+                    <input type="datetime-local" id="dataprogramarii" name="Data programarii" required>
                 </div>
 
-        
+                <input type="submit" value="Submit">
 
-         </main>
+            </form>
 
-        <footer>
-                    <div class="footer-text-left">Versiunea 1.0.0</div>
-                    <div class="footer-text-center">
-                        <span>Vulpe Alexandru-Catalin</span>
-                        <span>Anghel Marius-Cristi</span>
-                    </div>
-                    <div class="footer-text-right">Web Technologies 2019</div>
-        </footer>
-    
+            <script>
+
+                //uid, firstname, lastname, phone, email, brand, seria, problema, data_inreg
+                $(document).on('submit', '#addApp', function () {
+
+                    // get form data
+                    var nume = document.getElementById("nume").value;
+                    var prenume = document.getElementById("prenume").value;
+                    var numar = document.getElementById("numar").value;
+                    var email = document.getElementById("email").value;
+                    var marca = document.getElementById("marca").value;
+                    var seria = document.getElementById("seria").value;
+                    var problema = document.getElementById("problema").value;
+                    var dataprogramarii = document.getElementById("dataprogramarii").value;
+
+                    var data = {};
+                    data.firstname = nume;
+                    data.lastname = prenume;
+                    data.phone = numar;
+                    data.email = email;
+                    data.brand = marca;
+                    data.seria = seria;
+                    data.problema = problema;
+                    data.data_inreg = dataprogramarii.slice(0, 19).replace('T', ' ');
+
+                    document.getElementById("addApp").reset();
+
+                    // submit form data to api
+                    $.ajax({
+                        url: "http://localhost:801/bike_api/appointments",
+                        type: "PUT",
+                        contentType: 'application/json',
+                        headers: {
+                            "Bearer": getCookie('accessToken')
+                        },
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            if (!result['status']) {
+                                alert(result['message']);
+                            }
+                            else {
+                                alert(result['message']);
+
+                            }
+                        },
+                        error: function (xhr, resp, text) {
+                            console.log(xhr);
+                            console.log(resp);
+                            console.log(text);
+                            alert("Ceva nu a mers bine!!");
+                        }
+                    });
+
+                });
+
+
+            </script>
+        </div>
+
+
+
+    </main>
+
+    <footer>
+        <div class="footer-text-left">Versiunea 1.0.0</div>
+        <div class="footer-text-center">
+            <span>Vulpe Alexandru-Catalin</span>
+            <span>Anghel Marius-Cristi</span>
+        </div>
+        <div class="footer-text-right">Web Technologies 2019</div>
+    </footer>
+
 </body>
+
 </html>

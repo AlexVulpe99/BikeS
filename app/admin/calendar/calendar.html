@@ -6,8 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="calendar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://fullcalendar.io/releases/fullcalendar/3.10.0/lib/moment.min.js"></script>
+
+    <script src="https://fullcalendar.io/releases/core/4.2.0/main.min.js"></script>
+    <script src="https://fullcalendar.io/releases/daygrid/4.2.0/main.min.js"></script>
+    <script src="https://fullcalendar.io/releases/timegrid/4.2.0/main.min.js"></script>
+    <script src="https://fullcalendar.io/releases/resource-common/4.2.0/main.min.js"></script>
+    <script src="https://fullcalendar.io/releases/resource-daygrid/4.2.0/main.min.js"></script>
+    <script src="https://fullcalendar.io/releases/resource-timegrid/4.2.0/main.min.js"></script>
+
+    <link href='https://fullcalendar.io/releases/core/4.2.0/main.min.css' rel='stylesheet' />
+    <link href='https://fullcalendar.io/releases/daygrid/4.2.0/main.min.css' rel='stylesheet' />
+    <link href='https://fullcalendar.io/releases/timegrid/4.2.0/main.min.css' rel='stylesheet' />
     <title>BikeS.ro</title>
 </head>
+
+<script>
+    $(document).ready(function () {
+        if (!getCookie('accessTokenAdmin')) {
+            window.location.href = "../../landing-page/landing-page.html";
+        }
+    });
+
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+</script>
 
 <body>
     <header>
@@ -18,98 +44,139 @@
 
         <button type="button" class="buton" onclick="window.location.href='../home/home.html'">Home</button>
         <button type="button" class="buton_selected">Calendar</button>
+        <button class="buton" id="addEvent">Add Event</button>
         <button type="button" class="buton" onclick="window.location.href='../shop/shop.html'">Shop</button>
         <button type="button" class="buton" onclick="window.location.href='../news/news.html'">News</button>
+        <button type="button" class="buton" onclick="logout()">Log out</button>
+        <script>
+            function deleteCookie(name) {
+                document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
+            function logout() {
+                deleteCookie('accessTokenAdmin');
+                window.location.href = "../../landing-page/landing-page.html";
+            }
+        </script>
     </div>
 
     <main>
 
-        <div class="calendar">
+        <div id='calendar' style="max-width: 900px;margin: 40px auto;"></div>
 
-            <div class="month">
-                <ul>
-                    <li class="prev">&#10094;</li>
-                    <li class="next">&#10095;</li>
-                    <li>Martie<br><span style="font-size:18px">2019</span></li>
-                </ul>
-            </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.getElementById('calendar');
 
-            <ul class="weekdays">
-                <li>Luni</li>
-                <li>Marti</li>
-                <li>Miercuri</li>
-                <li>Joi</li>
-                <li>Vineri</li>
-                <li>Sambata</li>
-                <li>Duminica</li>
-            </ul>
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    plugins: ['resourceTimeGrid'],
+                    timeZone: 'UTC',
+                    minTime: "09:00:00",
+                    allDaySlot: false,
+                    maxTime: "17:00:00",
+                    defaultView: 'resourceTimeGridDay',
+                    resources: [
+                        { id: 'a', title: 'Mecanic' }
+                    ]
+                });
+                /* var event = {
+                    title: 'The Title',
+                    start: '2019-06-10 11:00:00',
+                    end: '2019-06-10 13:00:00',
+                    resourceId: 'a'
+                }; */
+                /* calendar.addEvent(event); */
 
-            <ul class="days">
-                <li>25</li>
-                <li>26</li>
-                <li>27</li>
-                <li>28</li>
-                <li><span class="liber">1</span></li>
-                <li><span class="ocupat">2</span></li>
-                <li><span class="liber">3</span></li>
-                <li><span class="ocupat">4</span></li>
-                <li><span class="liber">5</span></li>
-                <li><span class="ocupat">6</span></li>
-                <li><span class="zi-libera">7</span></li>
-                <li><span class="liber">8</span></li>
-                <li><span class="liber">9</span></li>
-                <li><span class="ocupat">10</span></li>
-                <li><span class="liber">11</span></li>
-                <li><span class="zi-libera">12</span></li>
-                <li><span class="liber">13</span></li>
-                <li><span class="zi-libera">14</span></li>
-                <li><span class="liber">15</span></li>
-                <li><span class="liber">16</span></li>
-                <li><span class="liber">17</span></li>
-                <li><span class="ocupat">18</span></li>
-                <li><span class="liber">19</span></li>
-                <li><span class="liber">20</span></li>
-                <li><span class="zi-libera">21</span></li>
-                <li><span class="selected">22</span></li>
-                <li><span class="liber">23</span></li>
-                <li><span class="ocupat">24</span></li>
-                <li><span class="ocupat">25</span></li>
-                <li><span class="ocupat">26</span></li>
-                <li><span class="liber">27</span></li>
-                <li><span class="zi-libera">28</span></li>
-                <li><span class="liber">29</span></li>
-                <li><span class="liber">30</span></li>
-                <li><span class="liber">31</span></li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-            </ul>
-        </div>
+                $.ajax({
+                    url: "http://localhost:801/bike_api/adminapp",
+                    type: "GET",
+                    contentType: 'application/json',
+                    headers: {
+                        "Bearer": getCookie('accessTokenAdmin')
+                    },
+                    success: function (result) {
+                        if (!result['status']) {
+                            alert(result['message']);
+                        }
+                        else {
+                            //console.log(result.data);
+                            var data = result.data;
+                            data.forEach(element => {
+                                var event = {
+                                    title: element.firstname + ' ' + element.lastname + ' ' + element.phone + ' ' + element.email + ' ' + element.brand + ' ' + element.seria + ' ' + element.problema,
+                                    start: element.data_inreg,
+                                    end: element.data_end,
+                                    resourceId: 'a'
+                                };
+                                calendar.addEvent(event);
+                            });
 
-        <div class="box--form">
-            <form method="POST">
-                <form-field style="text-align: center;">
-                    <h1>22 MARTIE 2019</h1>
-                </form-field>
+                        }
+                    },
+                    error: function (xhr, resp, text) {
+                        console.log(xhr);
+                        console.log(resp);
+                        console.log(text);
+                        alert("Ceva nu a mers bine!!");
+                    }
+                });
 
-                <form-field>
-                    <label for="email">Email user:</label>
-                    <input id="email" type="email" name="email">
-                </form-field>
+                document.getElementById("addEvent").addEventListener("click", function () {
+                    var dateStr = prompt('Introdu data start in format YYYY-MM-DD HH:mm:ss');
+                    var data_inceput = moment(dateStr).format("YYYY-MM-DD HH:mm:ss");
+                    if (!data_inceput)
+                        return false;
+                    var dateStr2 = prompt('Introdu data final in format YYYY-MM-DD HH:mm:ss');
+                    var data_final = moment(dateStr2).format("YYYY-MM-DD HH:mm:ss");
+                    if (!data_final)
+                        return false;
+                    var titlu = prompt('Introdu titlul evenimentului');
 
-                <form-field>
-                    <label for="bikeinfo">Bike-info:</label>
-                    <input id="bikeinfo" type="text" name="bikeinfo">
-                </form-field>
+                    if (!titlu)
+                        return false;
+                    /* var event = {
+                        title: titlu,
+                        start: data_inceput,
+                        end: data_final,
+                        resourceId: 'a'
+                    };
+                    calendar.addEvent(event); */
+                    var data = {};
+                    data.problema = titlu;
+                    data.data_inreg = data_inceput;
+                    data.data_end = data_final;
 
-                <button type="submit">Save</button>
-                <button type="button" style="background-color:red;">Delete</button>
-            </form>
-        </div>
+                    $.ajax({
+                        url: "http://localhost:801/bike_api/calendar",
+                        type: "PUT",
+                        contentType: 'application/json',
+                        headers: {
+                            "Bearer": getCookie('accessTokenAdmin')
+                        },
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            if (!result['status']) {
+                                alert(result['message']);
+                            }
+                            else {
+                                if (!alert(result['message'])) {
+                                    window.location.reload();
+                                }
+                            }
+                        },
+                        error: function (xhr, resp, text) {
+                            console.log(xhr);
+                            console.log(resp);
+                            console.log(text);
+                            alert("Ceva nu a mers bine!!");
+                        }
+                    });
+                });
+
+
+                calendar.render();
+            });
+
+        </script>
 
     </main>
 

@@ -6,8 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="shop.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
     <title>BikeS.ro</title>
+    <style>
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            padding-top: 100px;
+            /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
+
+<script>
+    $(document).ready(function () {
+        if (!getCookie('accessTokenAdmin')) {
+            window.location.href = "../../landing-page/landing-page.html";
+        }
+    });
+
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+</script>
 
 <body>
     <header>
@@ -20,44 +84,234 @@
         <button type="button" class="buton" onclick="window.location.href='../calendar/calendar.html'">Calendar</button>
         <button type="button" class="buton_selected">Shop</button>
         <button type="button" class="buton" onclick="window.location.href='../news/news.html'">News</button>
-    </div>
-
-    <div class="lista">
-        <ul>
-            <li>Biciclete</li>
-            <li class="selectedli">Piese</li>
-            <li>Accesorii</li>
-            <li>Echipamente</li>
-        </ul>
+        <button type="button" class="buton" onclick="logout()">Log out</button>
+        <script>
+            function deleteCookie(name) {
+                document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
+            function logout() {
+                deleteCookie('accessTokenAdmin');
+                window.location.href = "../../landing-page/landing-page.html";
+            }
+        </script>
     </div>
 
     <main>
-        <div class="feed">
+        <!-- <div class="feed">
             <img src="../../../assets/unknown.png" alt="img">
             <h2 class="info">Informatii</h2>
             <div class="button-box">
                 <button type="button">Edit</button>
                 <button type="button" style="background-color:red;">Delete</button>
             </div>
-        </div>
+        </div> -->
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
 
-        <div class="feed">
-            <img src="../../../assets/unknown.png" alt="img">
-            <h2 class="info">Informatii</h2>
-            <div class="button-box">
-                <button type="button">Edit</button>
-                <button type="button" style="background-color:red;">Delete</button>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modal-content"></div>
             </div>
+
         </div>
 
-        <form method="POST">
+        <div id="lista-feed" style="text-align: center; margin-top:50px;">
+
+        </div>
+
+        <script>
+            var modal = document.getElementById('myModal');
+            var span = document.getElementsByClassName("close")[0];
+            span.onclick = function () {
+                modal.style.display = "none";
+            }
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+
+            $.ajax({
+                url: "http://localhost:801/bike_api/shopitems",
+                type: "GET",
+                contentType: 'application/json',
+                headers: {
+                    "Bearer": getCookie('accessTokenAdmin')
+                },
+                success: function (result) {
+                    if (!result['status']) {
+                        alert(result['message']);
+                    }
+                    else {
+                        var data = result['data'];
+                        data.forEach(element => {
+                            var codHTML = '<img src=\"' + element['image_path'] + '\" >'
+                                + '<div class=\"feed\" style="display:block;">' + '<h3> Categorie: ' + element['category'] + ' </h3>' + '<h3>Pret: ' +
+                                element['price'] + ' </h3>' + '<h3>Tara origine: ' + element['country'] + ' </h3>' + '<h3>Garantie: ' +
+                                element['warranty'] + ' </h3>' + '<h3>Seria: ' + element['series'] + ' </h3>' + '<h3>Model: ' +
+                                element['model'] + ' </h3>' +
+                                '<div>' +
+                                '<button id="' + element.iid + '-edit" class="buton">Edit</button>' +
+                                '<button id="' + element.iid + '-delete" class="buton" style="background-color:red;">Delete</button>' +
+                                '</div>' +
+                                '</div > ';
+                            document.getElementById('lista-feed').insertAdjacentHTML('beforeend', codHTML);
+
+                            document.getElementById(element['iid'] + '-edit').addEventListener("click", function () {
+                                modal.style.display = "block";
+                                var content = document.getElementById("modal-content");
+
+                                var codForm = '<label for=\"modal-category\">Categorie:</label>' +
+                                    '<input type=\"text\" id=\"modal-category\" value=\"' + element.category + '\">' +
+                                    '<br>' +
+                                    '<label for=\"modal-price\">Pret:</label>' +
+                                    '<input type=\"number\" id=\"modal-price\" value=\"' + element.price + '\">' +
+                                    '<br>' +
+                                    '<label for=\"modal-country\">Tara origine:</label>' +
+                                    '<input type=\"text\" id=\"modal-country\" value=\"' + element.country + '\">' +
+                                    '<br>' +
+                                    '<label for=\"modal-warranty\">Garantie:</label>' +
+                                    '<input type=\"number\" id=\"modal-warranty\" value=\"' + element.warranty + '\">' +
+                                    '<br>' +
+                                    '<label for=\"modal-series\">Serie:</label>' +
+                                    '<input type=\"text\" id=\"modal-series\" value=\"' + element.series + '\">' +
+                                    '<br>' +
+                                    '<label for=\"modal-model\">Model:</label>' +
+                                    '<input type=\"text\" id=\"modal-model\" value=\"' + element.model + '\">' +
+                                    '<br>' +
+                                    '<button id=\"modal-buton\" class=\"buton\">Submit</button>';
+
+                                content.innerHTML = codForm;
+
+                                document.getElementById('modal-buton').addEventListener('click', function () {
+                                    var modalCategory = document.getElementById('modal-category').value;
+                                    var modalPrice = document.getElementById('modal-price').value;
+                                    var modalCountry = document.getElementById('modal-country').value;
+                                    var modalWarranty = document.getElementById('modal-warranty').value;
+                                    var modalSeries = document.getElementById('modal-series').value;
+                                    var modalModel = document.getElementById('modal-model').value;
+
+                                    var data = {};
+                                    data.category = modalCategory;
+                                    data.price = modalPrice;
+                                    data.country = modalCountry;
+                                    data.warranty = modalWarranty;
+                                    data.series = modalSeries;
+                                    data.model = modalModel;
+                                    data.iid = element.iid;
+
+                                    $.ajax({
+                                        url: "http://localhost:801/bike_api/shopitems",
+                                        type: "POST",
+                                        contentType: 'application/json',
+                                        headers: {
+                                            "Bearer": getCookie('accessTokenAdmin')
+                                        },
+                                        data: JSON.stringify(data),
+                                        success: function (result) {
+                                            modal.style.display = "block";
+
+                                            if (!alert(result['message'])) {
+                                                window.location.reload();
+                                            }
+                                        },
+                                        error: function (xhr, resp, text) {
+                                            console.log(xhr);
+                                            console.log(resp);
+                                            console.log(text);
+                                            alert("Ceva nu a mers bine!!");
+                                        }
+                                    });
+
+                                });
+
+                            });
+
+                            document.getElementById(element['iid'] + '-delete').addEventListener("click", function () {
+                                //DELETE pe shop cu iid
+                                var data = {};
+                                data.iid = element.iid;
+                                $.ajax({
+                                    url: "http://localhost:801/bike_api/shopitems",
+                                    type: "DELETE",
+                                    contentType: 'application/json',
+                                    headers: {
+                                        "Bearer": getCookie('accessTokenAdmin')
+                                    },
+                                    data: JSON.stringify(data),
+                                    success: function (result) {
+                                        if (!alert(result['message'])) {
+                                            window.location.reload();
+                                        }
+                                    },
+                                    error: function (xhr, resp, text) {
+                                        console.log(xhr);
+                                        console.log(resp);
+                                        console.log(text);
+                                        alert("Ceva nu a mers bine!!");
+                                    }
+                                });
+                            });
+
+                        });
+
+                        $('#downloadBtn').click(function () {
+                            var i = 1;
+                            var doc = new jsPDF();
+                            data.forEach(function (element) {
+                                doc.text(20, 10 + (i * 10),
+                                    "Categorie: " + element.category);
+                                i = i + 1;
+                                doc.text(20, 10 + (i * 10),
+                                    "Pret: " + element.price);
+                                i = i + 1;
+                                doc.text(20, 10 + (i * 10),
+                                    "Tara origine: " + element.country);
+                                i = i + 1;
+                                doc.text(20, 10 + (i * 10),
+                                    "Garantie: " + element.warranty);
+                                i = i + 1;
+                                doc.text(20, 10 + (i * 10),
+                                    "Seria: " + element.series);
+                                i = i + 1;
+                                doc.text(20, 10 + (i * 10),
+                                    "Model: " + element.model);
+                                i = i + 1;
+                                doc.text(20, 10 + (i * 10),
+                                    "------------------------");
+                                i = i + 1;
+                            });
+                            doc.save('shop-items.pdf');
+
+                            var link = document.createElement("a");
+                            link.setAttribute("href", '#');
+                            link.setAttribute("download", "shop-items.pdf");
+                            document.body.appendChild(link);
+
+                            link.click();
+
+
+                        });
+                    }
+                }, error: function (xhr, resp, text) {
+                    console.log(xhr);
+                    console.log(resp); console.log(text); alert("Ceva nu a mers bine!!");
+                }
+            });
+
+        </script>
+
+
+        <form method="POST" id="shopForm" onsubmit="return false">
             <form-field>
                 <h1>Add item</h1>
             </form-field>
 
             <form-field>
-                <label for="image">Image upload :</label>
-                <input id="image" type="file" name="image">
+                <label for="category">Categorie:</label>
+                <input id="category" type="text" name="category">
             </form-field>
 
             <form-field>
@@ -90,6 +344,58 @@
             </form-field>
 
         </form>
+
+        <button class="buton" id="downloadBtn"> Download PDF</button>
+
+        <script>
+            $(document).on('submit', '#shopForm', function () {
+
+                // get form data
+                var category = document.getElementById("category").value;
+                var price = document.getElementById("price").value;
+                var country = document.getElementById("country").value;
+                var warrant = document.getElementById("warrant").value;
+                var series = document.getElementById("series").value;
+                var model = document.getElementById("model").value;
+
+                var data = {};
+                data.category = category;
+                data.price = price;
+                data.country = country;
+                data.warranty = warrant;
+                data.series = series;
+                data.model = model;
+
+                document.getElementById("shopForm").reset();
+
+                // submit form data to api
+                $.ajax({
+                    url: "http://localhost:801/bike_api/shopitems",
+                    type: "PUT",
+                    contentType: 'application/json',
+                    headers: {
+                        "Bearer": getCookie('accessTokenAdmin')
+                    },
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        if (!result['status']) {
+                            alert(result['message']);
+                        }
+                        else {
+                            window.location.reload();
+
+                        }
+                    },
+                    error: function (xhr, resp, text) {
+                        console.log(xhr);
+                        console.log(resp);
+                        console.log(text);
+                        alert("Ceva nu a mers bine!!");
+                    }
+                });
+
+            });
+        </script>
     </main>
 
     <footer>

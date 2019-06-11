@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="register.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>BikeS.ro</title>
 </head>
 
@@ -14,44 +15,98 @@
         <div class="logo"><span style="color:white;">BikeS</span>.ro</div>
     </header>
 
+    <div id="content"></div>
+
     <div class="box--form">
-        <form method="POST">
+        <form id="registerForm" method="POST" onsubmit="return false">
             <form-field style="text-align: center;">
                 <h1>Register</h1>
             </form-field>
 
             <form-field>
-                <label for="firstname">First name:</label>
-                <input id="firstname" type="text" name="firstname">
-            </form-field>
-
-            <form-field>
-                <label for="lastname">Last name:</label>
-                <input id="lastname" type="text" name="lastname">
-            </form-field>
-
-            <form-field>
                 <label for="email">Email:</label>
-                <input id="email" type="email" name="email">
-            </form-field>
-
-            <form-field>
-                <label for="phoneNumber">Phone number:</label>
-                <input id="phoneNumber" type="number" min="0" oninput="validity.valid||(value='');" name="phoneNumber">
+                <input id="email" type="email" name="email" required>
             </form-field>
 
             <form-field>
                 <label for="password">Password:</label>
-                <input id="password" type="password" name="password">
+                <input id="password" type="password" name="password" required>
             </form-field>
 
             <form-field>
                 <label for="repeatpassword">Repeat Password:</label>
-                <input id="repeatpassword" type="password" name="repeatpassword">
+                <input id="repeatpassword" type="password" name="repeatpassword" required>
             </form-field>
 
             <button type="submit">Submit</button>
         </form>
+
+        <script>
+            $(document).ready(function () {
+                if (getCookie('accessToken')) {
+                    window.location.href = "../../user/home/home.html";
+                }
+                else
+                    if (getCookie('accessTokenAdmin')) {
+                        window.location.href = "../../admin/home/home.html";
+                    }
+            });
+            function setCookie(key, value) {
+                var expires = new Date();
+                expires.setTime(expires.getTime() + (1 * 60 * 60 * 1000));
+                document.cookie = key + '=' + value + ';expires=' + expires.toUTCString() + "; path=/";
+            }
+
+            function getCookie(key) {
+                var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+                return keyValue ? keyValue[2] : null;
+            }
+
+            $(document).on('submit', '#registerForm', function () {
+
+                // get form data
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                var repeatPassword = document.getElementById("repeatpassword").value;
+                var data = {};
+                data.email = email;
+                data.password = password;
+                document.getElementById("registerForm").reset();
+                if (password != repeatPassword) {
+                    alert("Parola este diferita de repeta parola!!");
+                    return false;
+                }
+                else {
+                    // submit form data to api
+                    $.ajax({
+                        url: "http://localhost:801/bike_api/register",
+                        type: "POST",
+                        contentType: 'application/json',
+                        data: JSON.stringify(data),
+                        success: function (result) {
+                            if (!result['status']) {
+                                alert(result['message']);
+                            }
+                            else {
+                                setCookie('accessToken', result['jwt']);
+                                window.location.href = "../../user/home/home.html";
+                            }
+                        },
+                        error: function (xhr, resp, text) {
+                            console.log(xhr);
+                            console.log(resp);
+                            console.log(text);
+                            alert("Ceva nu a mers bine!!");
+                        }
+                    });
+                }
+
+
+
+            });
+
+        </script>
+
     </div>
 
     <div class="box-info">

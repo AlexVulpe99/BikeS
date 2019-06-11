@@ -1,6 +1,6 @@
 body
 {
-    background-color: #FFF5EE;
+    background-color: wheat;
 }
 
 header
@@ -22,10 +22,6 @@ header .logo
     color:#B0E0E6;
 }
 
-.box--form
-{
-    width:100%;
-}
 
 .box--form form
 {

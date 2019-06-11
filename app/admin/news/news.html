@@ -6,8 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="news.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <title>BikeS.ro</title>
 </head>
+
+<script>
+    $(document).ready(function () {
+        if (!getCookie('accessTokenAdmin')) {
+            window.location.href = "../../landing-page/landing-page.html";
+        }
+    });
+
+    function getCookie(key) {
+        var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+        return keyValue ? keyValue[2] : null;
+    }
+</script>
 
 <body>
     <header>
@@ -20,35 +34,112 @@
         <button type="button" class="buton" onclick="window.location.href='../calendar/calendar.html'">Calendar</button>
         <button type="button" class="buton" onclick="window.location.href='../shop/shop.html'">Shop</button>
         <button type="button" class="buton_selected">News</button>
+        <button type="button" class="buton" onclick="logout()">Log out</button>
+        <script>
+            function deleteCookie(name) {
+                document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+            }
+            function logout() {
+                deleteCookie('accessTokenAdmin');
+                window.location.href = "../../landing-page/landing-page.html";
+            }
+        </script>
     </div>
 
     <main>
-        <div class="feed">
+        <!-- <div class="feed">
             <img src="../../../assets/unknown.png" alt="img">
             <h2 class="info">Informatii</h2>
             <div class="button-box">
                 <button type="button">Edit</button>
                 <button type="button" style="background-color:red;">Delete</button>
             </div>
+        </div> -->
+
+        <div id="feed-list">
+
         </div>
 
-        <div class="feed">
-            <img src="../../../assets/unknown.png" alt="img">
-            <h2 class="info">Informatii</h2>
-            <div class="button-box">
-                <button type="button">Edit</button>
-                <button type="button" style="background-color:red;">Delete</button>
-            </div>
-        </div>
+        <script>
+            $.ajax({
+                url: "http://localhost:801/bike_api/news",
+                type: "GET",
+                contentType: 'application/json',
+                headers: {
+                    "Bearer": getCookie('accessTokenAdmin')
+                },
+                success: function (result) {
+                    if (!result['status']) {
+                        alert(result['message']);
+                    }
+                    else {
+                        var data = result['data'];
+                        data.sort(function (a, b) {
+                            a = new Date(a.createdAt);
+                            b = new Date(b.createdAt);
+                            return a > b ? -1 : a < b ? 1 : 0;
+                        });
+                        data.forEach(element => {
+                            var codImp = '<h1 class="important" style="text-align:center;">IMPORTANT!!!</h1>';
 
-        <form method="POST">
+                            var codHTML = '<div class="feed">' +
+                                '<img src="' + element['image_path'] + '" >' +
+                                '<h2 class="info">' + element['descriere'] + '</h2>' +
+                                '<div class="button-box">' +
+                                '<button id="' + element.nid + '-delete" type="button" style="background-color:red;">Delete</button>' +
+                                '</div>' +
+                                '</div>';
+
+                            if (element['important']) {
+                                document.getElementById('feed-list').insertAdjacentHTML('beforeend', codImp);
+                            }
+
+                            document.getElementById('feed-list').insertAdjacentHTML('beforeend', codHTML);
+
+                            document.getElementById(element['nid'] + '-delete').addEventListener("click", function () {
+                                //DELETE pe news cu nid
+                                var data = {};
+                                data.nid = element.nid;
+                                $.ajax({
+                                    url: "http://localhost:801/bike_api/news",
+                                    type: "DELETE",
+                                    contentType: 'application/json',
+                                    headers: {
+                                        "Bearer": getCookie('accessTokenAdmin')
+                                    },
+                                    data: JSON.stringify(data),
+                                    success: function (result) {
+                                        if (!alert(result['message'])) {
+                                            window.location.reload();
+                                        }
+                                    },
+                                    error: function (xhr, resp, text) {
+                                        console.log(xhr);
+                                        console.log(resp);
+                                        console.log(text);
+                                        alert("Ceva nu a mers bine!!");
+                                    }
+                                });
+                            });
+
+                        });
+                    }
+                }, error: function (xhr, resp, text) {
+                    console.log(xhr);
+                    console.log(resp); console.log(text); alert("Ceva nu a mers bine!!");
+                }
+            });
+        </script>
+
+
+        <form method="POST" id="newsForm" onsubmit="return false">
             <form-field>
                 <h1>Add news</h1>
             </form-field>
 
             <form-field>
-                <label for="image">Image upload :</label>
-                <input id="image" type="file" name="image">
+                <label for="important">IMPORTANT </label>
+                <input id="important" type="checkbox" name="important">
             </form-field>
 
             <form-field>
@@ -60,6 +151,56 @@
             </form-field>
 
         </form>
+
+        <script>
+            $(document).on('submit', '#newsForm', function () {
+
+                // get form data
+                var descriere = document.getElementById("info").value;
+                var important = document.getElementById("important");
+
+
+                var data = {};
+                data.descriere = descriere;
+                if (important.checked) {
+                    data.important = 1;
+                }
+                else
+                    data.important = 0;
+
+                document.getElementById("newsForm").reset();
+
+               
+
+                // submit form data to api
+                $.ajax({
+                    url: "http://localhost:801/bike_api/news",
+                    type: "PUT",
+                    contentType: 'application/json',
+                    headers: {
+                        "Bearer": getCookie('accessTokenAdmin')
+                    },
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        if (!result['status']) {
+                            alert(result['message']);
+                        }
+                        else {
+                            window.location.reload();
+
+                        }
+                    },
+                    error: function (xhr, resp, text) {
+                        console.log(xhr);
+                        console.log(resp);
+                        console.log(text);
+                        alert("Ceva nu a mers bine!!");
+                    }
+                });
+
+            });
+
+        </script>
     </main>
 
     <footer>

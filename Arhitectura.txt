@@ -8,7 +8,7 @@ users --> uid - username - password
 
 admins --> aid - username - password
 
-calendar --> eid(entry-id) - date - hour - aid(optional/poate fi null) - email - problem
+calendar --> eid(entry-id) - date - hour - apid(optional/poate fi null) - email - problem
 
 shop --> iid - category - image - price - country - warranty - series - model
 
@@ -16,7 +16,7 @@ bikes --> bid - uid - material - year - state - weight - speeds - image
 
 news --> nid - image - description
 
-appointments --> aid - uid - firstname - lastname - phone - email - brand - series - problem - date - image
+appointments --> apid - uid - firstname - lastname - phone - email - brand - series - problem - date - image - response(flag)
 
 --/TABELE--
 

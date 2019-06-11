@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BikeS User report</title>
+</head>
+
+<body>
+    <header>
+        <h1 style="text-align: center;">Manual de instructiuni - BikeS</h1>
+    </header>
+
+    <div role="contentinfo" style="text-align: center">
+        <dl>
+            <dt>Authors</dt>
+            <dd>
+                <a href="https://www.facebook.com/alex.vulpe.10">Alexandru Vulpe</a>
+                &amp;
+                <a href="https://www.facebook.com/cristi.anghel.10">Anghel Cristi</a>
+            </dd>
+        </dl>
+    </div>
+
+    <section id="introduction" role="doc-introduction">
+        <!-- review? -->
+        <h2>Introducere</h2>
+        <p>
+            <a href="http://localhost:801/app/landing-page/landing-page.html">Sistem online</a> de management al
+            programărilor și stocurilor unui operatii de service de biciclete.
+        </p>
+    </section>
+
+    <section id="structure">
+        <h2>Structura</h2>
+        <section id="landing-page">
+            <p>Primul lucru pe care il gasiti cand accesati aplicatia noastra este <a
+                    href="http://localhost:801/app/landing-page/landing-page.html">landing-page-ul</a>. Acolo
+                se gasesc o mica descriere alaturi de 2 butoane.
+                <img src="landing-page.png"></p>
+            <p>Daca nu aveti cont pe aplicatie, primul pas este <a
+                    href="http://localhost:801/app/landing-page/register/register.html">sa va faceti cont</a>.
+                <p>Desigur, daca aveti deja un cont, atunci puteti accesa pagina de <a
+                        href="http://localhost:801/app/landing-page/login/login.html">login</a>.</p>
+            </p>
+        </section>
+        <section id="register">
+            <p>Pasul de register este conceput cat se poate de simplu: un <a
+                    href="https://dexonline.net/definitie-formular">formular</a> in care trebuie sa introduceti o <a
+                    href="https://ro.wikipedia.org/wiki/E-mail">adresa de email</a> valida, o parola si un al treilea
+                camp in care ne asiguram ca nu ati gresit parola.</p>
+            <img src="register.png">
+        </section>
+        <section id="login">
+            <p>In cazul in care aveti deja cont, trebuie doar sa accesati pagina de <a
+                    href="http://localhost:801/app/landing-page/login/login.html">login</a> unde veti gasi tot un <a
+                    href="https://dexonline.net/definitie-formular">formular</a> in care trebuie sa introduceti adresa
+                de email si parola.</p>
+            <img src="login.png">
+        </section>
+        <section id="home">
+            <p>Si in cazul <a href="#register">register-ului</a> si al <a href="#login">login-ului</a>, in urma completarii corecte a formularelor veti ajunge pe pagina de <a href="#home">home</a> a aplicatiei.</p>
+            <p>Aici va puteti gestiona bicicletele proprii.</p>
+            <p>In partea de sus a paginii veti gasi o bara de butoane care conduc catre diferite pagini ale aplicatiei. </p>
+            <img src="navbar.png">
+        </section>
+        <section id="calendar">
+            <p>Pe pagina calendarului puteti verifica cand este liber mecanicul pentru a putea face o <a href="#programare">programare</a>.</p>
+            <img src="calendar.png">
+        </section>
+        <section id="shop">
+            <p>Pe pagina magazinului puteti vedea toate piesele in stoc din magazinul service-ului.</p>
+            <img src="shop.png">
+        </section>
+        <section id="new-bike">
+            <p>Pe pagina de New-Bike veti gasi un <a href="https://dexonline.net/definitie-formular">formular</a>, care contine detalii despre o bicicleta. La submit, detaliile bicicletei le veti gasi pe pagina de <a href="#home">home</a>.</p>
+            <img src="new-bike.png">
+        </section>
+        <section id="news">
+            <p>Pe pagina de news sunt postate cele mai noi anunturi in legatura cu service-ul. Stirile importante sunt marcate corespunzator. O pagina pe care va sfatuim sa o urmariti.</p>
+            <img src="news.png">
+        </section>
+        <section id="programare">
+            <p>Pe pagina de programari veti gasi un formular cu datele dumneavoastra si cu detaliile bicicletei si a problemei. Selectati o data la care ati vrea sa va faceti o programare si o ora (bineinteles, va sfatuim sa verificati <a href="#calendar">calendarul</a> si sa alegeti o data libera). Dupa ce apasati butonul de trimitere, veti fi informati ca cererea de programare a fost inregistrata. Mecanicul va procesa cererea dumneavoasta, iar daca totul este ok si o accepta, veti fi trecut in <a href="#calendar">calendar</a>. Daca in 24 de ore de la completare cererea nu apare in calendar, inseamna ca a fost o problema, si va rugam sa mai aplicati o data.</p>
+            <img src="programare.png">
+        </section>
+    </section>
+</body>
+
+</html>
